@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SymPy, Matplotlib & Flask</title>
+    <!-- MathJax pour rendre les formules mathématiques -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 30px; background: #fdfdfd; }
+        .form-container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .form-group { display: inline-block; margin-right: 20px; }
+        input { padding: 8px; font-size: 16px; width: 120px; }
+        button { background: #28a745; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; }
+        .equation-box { text-align: center; font-size: 1.4em; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .resultat-img { text-align: center; margin-top: 20px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>Calcul Symbolique et Tracé avec Flask</h1>
+
+    <!-- Affichage dynamique de l'expression SymPy convertie en LaTeX -->
+    <div class="equation-box">
+        $$H(\omega) = {{ latex_expr | safe }}$$
+    </div>
+
+    <div class="form-container">
+        <form method="POST">
+            <div class="form-group">
+                <label for="k">Gain k :</label>
+                <input type="text" id="k" name="k" value="{{ k }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="wc">Pulsation ωc :</label>
+                <input type="text" id="wc" name="wc" value="{{ wc }}" required>
+            </div>
+            
+            <button type="submit">Recalculer et Tracer</button>
+        </form>
+    </div>
+
+    <div class="resultat-img">
+        <img src="data:image/png;base64,{{ img_data }}" alt="Diagramme de Bode Matplotlib">
+    </div>
+
+</body>
+</html>
